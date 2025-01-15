@@ -37,7 +37,7 @@ This turned out to be the most elegant solution of the ones I explored (see belo
 
 <details>
 
-<summary>Manually inserting `<sup/>` wrapped commas into the markdown</summary>
+<summary>Manually inserting \<sup \/\> wrapped commas into the markdown</summary>
 
 ```markdown
 My cool statement[^reference-1], which is supported by other cool statements[^reference-2]<sup>, </sup>[^reference-3].
@@ -47,7 +47,8 @@ My cool statement[^reference-1], which is supported by other cool statements[^re
 [^reference-3]: Doe, Jane. 2023. Other Supporting Paper Title. 
 ```
 
-But that's extremely tedious.
+While I like this solution, it's extremely tedious. It's also quite a bit of labor if you've already written an entire article (or several) and need to go back and manually inject such elements.
+
 </details>
 
 <details>
