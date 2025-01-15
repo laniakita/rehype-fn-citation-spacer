@@ -37,7 +37,7 @@ This turned out to be the most elegant solution of the ones I explored (see belo
 
 <details>
 
-<summary>Manually inserting \<sup \/\> wrapped commas into the markdown</summary>
+<summary>Manually inserting `sup` wrapped commas into the markdown</summary>
 
 ```markdown
 My cool statement[^reference-1], which is supported by other cool statements[^reference-2]<sup>, </sup>[^reference-3].
