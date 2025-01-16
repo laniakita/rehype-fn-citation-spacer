@@ -4,7 +4,5 @@ import remarkGfm from 'remark-gfm';
 
 export const mdxPlugin = mdx({
   remarkPlugins: [remarkGfm],
-  rehypePlugins: [
-    [rehypeCitationSpacer, { verbose: false, SuppressErr: false }],
-  ],
+  rehypePlugins: [[rehypeCitationSpacer, { SuppressErr: false }]],
 });
