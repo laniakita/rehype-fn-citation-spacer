@@ -21,6 +21,7 @@
   ],
   "scripts": {
     "build:test": "bun ./scripts/test-runner.ts",
+    "serve:test": "bunx serve -s ./__tests__/dist/app-build",
     "test": "bun test",
     "build": "bun build",
     "check": "bunx biome check --write"
@@ -38,7 +39,8 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "react-dom": "^19.0.0",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "wouter": "^3.3.5"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
