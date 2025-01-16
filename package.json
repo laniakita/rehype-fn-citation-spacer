@@ -20,8 +20,8 @@
     "dist"
   ],
   "scripts": {
-    "build:test": "bun ./scripts/test-runner.ts",
-    "serve:test": "bunx serve -s -n ./__tests__/dist/app-build",
+    "test:build": "bun ./src/scripts/test-runner.ts",
+    "test:serve": "bunx serve -s -n ./src/__tests__/dist/app-build",
     "test": "bun test",
     "build": "bun build",
     "check": "bunx biome check --write"

@@ -1,7 +1,7 @@
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import type { BunPlugin } from 'bun';
-import { mdxPlugin } from 'lib/bun-mdx';
+import { mdxPlugin } from '../__tests__/fixtures/lib/bun-mdx';
 
 const buildTestDist = async () => {
   const __dirname = import.meta.dir;
