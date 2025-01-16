@@ -24,9 +24,17 @@
     "test": "bun test",
     "check": "bunx biome check --write"
   },
+  "dependencies": {
+    "@types/hast": "^3.0.4",
+    "unist-util-visit": "^5.0.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/bun": "latest"
+    "@mdx-js/esbuild": "^3.1.0",
+    "@mdx-js/react": "^3.1.0",
+    "@types/bun": "latest",
+    "@types/mdx": "^2.0.13",
+    "@types/react": "^19.0.7"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -48,9 +56,5 @@
     "github flavored markdown",
     "syntax",
     "plugin"
-  ],
-  "dependencies": {
-    "@types/hast": "^3.0.4",
-    "unist-util-visit": "^5.0.0"
-  }
+  ]
 }
