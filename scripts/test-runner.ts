@@ -1,7 +1,7 @@
-import type { BunPlugin } from "bun";
-import { mdxPlugin } from "lib/bun-mdx";
-import { mkdir } from "node:fs/promises";
-import path from "node:path";
+import { mkdir } from 'node:fs/promises';
+import path from 'node:path';
+import type { BunPlugin } from 'bun';
+import { mdxPlugin } from 'lib/bun-mdx';
 
 const buildTestDist = async () => {
   const __dirname = import.meta.dir;
@@ -11,8 +11,8 @@ const buildTestDist = async () => {
   try {
     // create build output folder
     const appBuildPath = path.join(__dirname, appBuildDir);
-    await mkdir(appBuildPath, {recursive: true});
-    
+    await mkdir(appBuildPath, { recursive: true });
+
     // copy the index.html to the folder
     const indexHtml = Bun.file(path.join(__dirname, `${appSrcDir}/index.html`));
     await Bun.write(`${appBuildPath}/index.html`, indexHtml);
@@ -21,7 +21,7 @@ const buildTestDist = async () => {
     await Bun.build({
       entrypoints: [path.join(__dirname, `${appSrcDir}/index.tsx`)],
       outdir: path.join(__dirname, appBuildDir),
-      plugins: [(mdxPlugin as unknown as BunPlugin)],
+      plugins: [mdxPlugin as unknown as BunPlugin],
       throw: true,
       experimentalCss: true,
     });
