@@ -20,8 +20,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "bun build",
+    "build:test": "bun ./scripts/test-runner.ts",
     "test": "bun test",
+    "build": "bun build",
     "check": "bunx biome check --write"
   },
   "dependencies": {
@@ -34,7 +35,10 @@
     "@mdx-js/react": "^3.1.0",
     "@types/bun": "latest",
     "@types/mdx": "^2.0.13",
-    "@types/react": "^19.0.7"
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "react-dom": "^19.0.0",
+    "remark-gfm": "^4.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

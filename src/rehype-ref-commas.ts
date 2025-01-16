@@ -6,7 +6,7 @@ import { visit } from 'unist-util-visit';
  * todo: attribute filter
  *
  */
-export const rehypeRefCommas = () => {
+const rehypeRefCommas = () => {
   return (tree: Root) => {
     visit(tree, 'element', (node) => {
       if (node.tagName === 'p') {
@@ -45,3 +45,5 @@ export const rehypeRefCommas = () => {
     });
   };
 };
+
+export default rehypeRefCommas

@@ -1,1 +1,1 @@
-preload = ["./bun-mdx.ts"]
+preload = ["./lib/bun-mdx.ts"]
