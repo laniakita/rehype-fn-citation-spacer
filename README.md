@@ -1,4 +1,4 @@
-# rehype-ref-commas
+# rehype-citation-spacer
 
 This is a rehype plugin that runs after remarkGfm (required), and separates multiple inline citations/references in the generated HTML markup with a comma (and a space). 
 
@@ -29,7 +29,7 @@ The only problem is that when multiple inline references are used, they wind up 
 
 Which results in a pretty confusing user experience.
 
-## My Solution: A Rehype Plugin (rehype-ref-commas)
+## My Solution: A Rehype Plugin (rehype-citation-spacer)
 
 This turned out to be the most elegant solution of the ones I explored (see below), so I'm sharing it with anyone who might benefit from such a plugin. What this plugin does is inject `<sup>, </sup>` nodes into the HAST tree, between `<sup />` nodes containing child `<a />` that have a `data-footnote-ref` attribute (which was added by `remarkGfm`).
 
@@ -67,7 +67,7 @@ Simply import and load `rehypeRefCommas` into your rehype plugins array. Below i
 import type { Options } from '@mdx-js/loader';
 import { bundleMDX } from 'mdx-bundler';
 import remarkGfm from 'remark-gfm'; // required for rehypeRefCommas
-import rehypeRefCommas from 'rehype-ref-commas';
+import rehypeRefCommas from 'rehype-citation-spacer';
 
 const result = await bundleMDX({
   source: `# my MDX string ...`,

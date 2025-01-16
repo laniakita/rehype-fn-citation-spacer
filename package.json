@@ -1,5 +1,5 @@
 {
-  "name": "rehype-ref-commas",
+  "name": "rehype-citation-spacer",
   "version": "0.0.0",
   "description": "A Rehype plugin that separates multiple inline references with commas.",
   "author": "Lani Akita <me@laniakita.com>",
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/laniakita/rehype-ref-commas"
+    "url": "https://github.com/laniakita/rehype-citation-spacer"
   },
   "bugs": {
-    "url": "https://github.com/laniakita/rehype-ref-commas/issues"
+    "url": "https://github.com/laniakita/rehype-citation-spacer/issues"
   },
-  "homepage": "https://github.com/laniakita/rehype-ref-commas",
+  "homepage": "https://github.com/laniakita/rehype-citation-spacer",
   "files": [
     "dist"
   ],
@@ -54,7 +54,7 @@
     "comma",
     "footnote",
     "separator",
-    "rehype-ref-commas",
+    "rehype-citation-spacer",
     "remark",
     "gfm",
     "remarkGfm",
