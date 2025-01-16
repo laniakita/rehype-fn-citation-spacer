@@ -1,6 +1,7 @@
 import type { ElementContent, Root } from 'hast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
+import { supCommaSpacer } from './spacers';
 
 export interface RehypeRefConfigOpts {
   childDataAttrBoolName?: string;
@@ -8,28 +9,20 @@ export interface RehypeRefConfigOpts {
   suppressErr?: boolean;
 }
 
-const supCommaSpacer = {
-  type: 'element',
-  tagName: 'sup',
-  properties: {},
-  children: [
-    {
-      type: 'text',
-      value: ', ',
-    },
-  ],
-} satisfies ElementContent;
-
 /**
  * Inserts a defined "spacer", or a <sup>{`, `}</sup> (default),
- * between adjacent <sup /> wrapping a single child element with a matching data-attr.
+ * between adjacent <sup /> wrapping a single child element
+ * with a matching data-attr.
  */
-const rehypeCitationSpacer: Plugin<[RehypeRefConfigOpts?], Root> = ({
+export const rehypeCitationSpacer: Plugin<[RehypeRefConfigOpts?], Root> = ({
   childDataAttrBoolName = 'dataFootnoteRef',
   spacer = supCommaSpacer,
   suppressErr = true,
 } = {}) => {
-  if (!suppressErr && childDataAttrBoolName === undefined) {
+  if (
+    !suppressErr &&
+    (childDataAttrBoolName === undefined || childDataAttrBoolName.length === 0)
+  ) {
     console.error(
       '[ERR]: Configured childDataAttrBoolName is undefined! Falling back to default: dataFootnoteRef',
     );
@@ -80,4 +73,3 @@ const rehypeCitationSpacer: Plugin<[RehypeRefConfigOpts?], Root> = ({
   };
 };
 
-export default rehypeCitationSpacer;

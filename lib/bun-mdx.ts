@@ -1,4 +1,4 @@
-import rehypeCitationSpacer from '@/src/rehype-citation-spacer';
+import rehypeCitationSpacer from '@/src/index';
 import mdx from '@mdx-js/esbuild';
 import remarkGfm from 'remark-gfm';
 

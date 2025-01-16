@@ -1,1 +1,3 @@
-console.log('Hello via Bun!');
+import { rehypeCitationSpacer } from './core';
+
+export default rehypeCitationSpacer;
