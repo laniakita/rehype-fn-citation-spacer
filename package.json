@@ -1,0 +1,54 @@
+{
+  "name": "rehype-ref-commas",
+  "version": "0.0.0",
+  "description": "A Rehype plugin that separates multiple inline references with commas.",
+  "author": "Lani Akita <me@laniakita.com>",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "bun": "1.1.43"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laniakita/rehype-ref-commas"
+  },
+  "bugs": {
+    "url": "https://github.com/laniakita/rehype-ref-commas/issues"
+  },
+  "homepage": "https://github.com/laniakita/rehype-ref-commas",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build",
+    "test": "bun test"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "rehype",
+    "ref",
+    "reference",
+    "citation",
+    "comma",
+    "footnote",
+    "separator",
+    "rehype-ref-commas",
+    "remark",
+    "gfm",
+    "remarkGfm",
+    "github",
+    "markdown",
+    "github flavored markdown",
+    "syntax",
+    "plugin"
+  ],
+  "dependencies": {
+    "@types/hast": "^3.0.4",
+    "unist-util-visit": "^5.0.0"
+  }
+}
