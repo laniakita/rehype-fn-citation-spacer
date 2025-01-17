@@ -10,21 +10,22 @@ export interface RehypeRefConfigOpts {
   suppressErr?: boolean;
 }
 
-export const RehypeCitationSpacerConfig = z.object({
+const RehypeCitationSpacerConfigSchema = z.object({
   suppressErr: z.optional(z.boolean()),
   childDataAttrBoolName: z.optional(z.string().min(1)),
   spacer: z.optional(z.custom<ElementContent>()),
 });
+
+export type RehypeCitationSpacerConfig = z.infer<
+  typeof RehypeCitationSpacerConfigSchema
+>;
 
 /**
  * Inserts a defined "spacer", or a <sup>{`, `}</sup> (default),
  * between adjacent <sup /> wrapping a single child element
  * with a matching data-attr.
  */
-export const rehypeCitationSpacer: Plugin<
-  [z.infer<typeof RehypeCitationSpacerConfig>?],
-  Root
-> = ({
+const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
   suppressErr = true,
   childDataAttrBoolName = 'dataFootnoteRef',
   spacer = supCommaSpacer,
@@ -89,3 +90,5 @@ export const rehypeCitationSpacer: Plugin<
     });
   };
 };
+
+export default rehypeCitationSpacer;

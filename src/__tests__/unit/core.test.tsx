@@ -6,10 +6,8 @@ import type { ElementContent } from 'hast';
 import * as ReactDomServer from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
-import type { z } from 'zod';
-import {
+import rehypeCitationSpacer, {
   type RehypeCitationSpacerConfig,
-  rehypeCitationSpacer,
 } from '../../core';
 
 const commasNeededFile = Bun.file(
@@ -33,7 +31,7 @@ const customSpacer = {
 
 const resCommas = async (
   isCommas: boolean,
-  options?: z.infer<typeof RehypeCitationSpacerConfig>,
+  options?: RehypeCitationSpacerConfig,
 ) => {
   return await evaluate(isCommas ? commasNeededString : noCommasNeededString, {
     ...runtime,
@@ -44,7 +42,7 @@ const resCommas = async (
 
 const resCommasNoRemark = async (
   isCommas: boolean,
-  options?: z.infer<typeof RehypeCitationSpacerConfig>,
+  options?: RehypeCitationSpacerConfig,
 ) => {
   return await evaluate(isCommas ? commasNeededString : noCommasNeededString, {
     ...runtime,
@@ -239,7 +237,7 @@ describe('Custom spacer config is valid', async () => {
     expect(htmlString).toMatch(re);
   });
 
-  test('commasNeeded: contains default spacer in 4 places', async () => {
+  test('commasNeeded: contains custom spacer in 4 places', async () => {
     const { default: TestCompileCustomSpacer } = await resCommas(
       true,
       customSpacerConf,
@@ -262,7 +260,7 @@ describe('Custom spacer config is valid', async () => {
     expect(htmlString).not.toMatch(re);
   });
 
-  test('noCommasNeeded: contains default spacer no where', async () => {
+  test('noCommasNeeded: contains custom spacer no where', async () => {
     const { default: TestCompileCustomSpacer } = await resCommas(
       false,
       customSpacerConf,
