@@ -27,8 +27,7 @@
   "dependencies": {
     "@types/hast": "^3.0.4",
     "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0",
-    "zod": "^3.24.1"
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -42,7 +41,8 @@
     "remark-gfm": "^4.0.0"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "zod": "^3.24.1"
   },
   "keywords": [
     "rehype",
