@@ -10,7 +10,7 @@ export interface RehypeRefConfigOpts {
   suppressErr?: boolean;
 }
 
-const RehypeCitationSpacerConfigSchema = v.object({
+export const RehypeCitationSpacerConfigSchema = v.object({
   suppressErr: v.optional(v.boolean()),
   childDataAttrBoolName: v.optional(v.pipe(v.string(), v.minLength(1))),
   spacer: v.optional(v.custom<ElementContent>((input) => {
