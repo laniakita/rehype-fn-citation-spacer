@@ -33,8 +33,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@happy-dom/global-registrator": "^16.6.0",
     "@mdx-js/esbuild": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.0",
     "@types/bun": "latest",
     "@types/mdx": "^2.0.13",
     "@types/react": "^19.0.7",
