@@ -3,7 +3,7 @@ import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
 import { supCommaSpacer } from './spacers';
 
-export interface RehypeRefConfigOpts {
+export interface RehypeCitationSpacerConfig {
   childDataAttrBoolName?: string;
   spacer?: ElementContent;
   suppressErr?: boolean;
@@ -14,7 +14,7 @@ export interface RehypeRefConfigOpts {
  * between adjacent <sup /> wrapping a single child element
  * with a matching data-attr.
  */
-export const rehypeCitationSpacer: Plugin<[RehypeRefConfigOpts?], Root> = ({
+export const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
   childDataAttrBoolName = 'dataFootnoteRef',
   spacer = supCommaSpacer,
   suppressErr = true,
@@ -28,7 +28,13 @@ export const rehypeCitationSpacer: Plugin<[RehypeRefConfigOpts?], Root> = ({
     );
   }
 
-  if (!suppressErr && !(spacer satisfies ElementContent)) {
+  const testSpacer = (spacer satisfies ElementContent) || {};
+
+  if (
+    !suppressErr &&
+    Object.keys(testSpacer).length === 0 &&
+    {}.constructor === Object
+  ) {
     console.error(
       '[ERR]: Configured spacer is not of type ElementContent! Falling back to default: comma-spacer',
     );
@@ -72,4 +78,3 @@ export const rehypeCitationSpacer: Plugin<[RehypeRefConfigOpts?], Root> = ({
     });
   };
 };
-
