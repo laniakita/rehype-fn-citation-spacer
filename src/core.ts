@@ -36,7 +36,7 @@ export const rehypeCitationSpacer: Plugin<
     console.error(
       '[ERR]: Configured childDataAttrBoolName is undefined! Falling back to default: dataFootnoteRef',
     );
-    childDataAttrBoolName = 'dataFootnoteRef'
+    childDataAttrBoolName = 'dataFootnoteRef';
   }
 
   const testSpacer = (spacer satisfies ElementContent) || {};

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, spyOn, test, jest } from 'bun:test';
+import { afterEach, describe, expect, jest, spyOn, test } from 'bun:test';
 import path from 'node:path';
 import { supCommaSpacer } from '@/src/spacers';
 import { evaluate } from '@mdx-js/mdx';
@@ -6,11 +6,11 @@ import type { ElementContent } from 'hast';
 import * as ReactDomServer from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
-import {
-  rehypeCitationSpacer,
-  type RehypeCitationSpacerConfig,
-} from '../../core';
 import type { z } from 'zod';
+import {
+  type RehypeCitationSpacerConfig,
+  rehypeCitationSpacer,
+} from '../../core';
 
 const commasNeededFile = Bun.file(
   path.join(import.meta.dir, '../fixtures/posts/commas-needed.mdx'),
@@ -63,11 +63,10 @@ const badAttrConf = {
 
 const customSpacerConf = {
   suppressErr: false,
-  spacer: customSpacer
-}
+  spacer: customSpacer,
+};
 
 const consoleSpy = spyOn(console, 'error').mockImplementation(() => {});
-
 
 const re = /<sup>, <\/sup>/g;
 
@@ -230,7 +229,10 @@ describe('Empty (default) config is valid', async () => {
 describe('Custom spacer config is valid', async () => {
   const re = /<sup> \| <\/sup>/g;
   test('commasNeeded: contains custom spacer (`<sup> | </sup>`)', async () => {
-    const { default: TestCompileCustomSpacer } = await resCommas(true, customSpacerConf);
+    const { default: TestCompileCustomSpacer } = await resCommas(
+      true,
+      customSpacerConf,
+    );
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileCustomSpacer />,
     );
@@ -238,7 +240,10 @@ describe('Custom spacer config is valid', async () => {
   });
 
   test('commasNeeded: contains default spacer in 4 places', async () => {
-    const { default: TestCompileCustomSpacer } = await resCommas(true, customSpacerConf);
+    const { default: TestCompileCustomSpacer } = await resCommas(
+      true,
+      customSpacerConf,
+    );
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileCustomSpacer />,
     );
@@ -247,7 +252,10 @@ describe('Custom spacer config is valid', async () => {
   });
 
   test('noCommasNeeded: contains no spacer', async () => {
-    const { default: TestCompileCustomSpacer } = await resCommas(false, customSpacerConf);
+    const { default: TestCompileCustomSpacer } = await resCommas(
+      false,
+      customSpacerConf,
+    );
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileCustomSpacer />,
     );
@@ -255,7 +263,10 @@ describe('Custom spacer config is valid', async () => {
   });
 
   test('noCommasNeeded: contains default spacer no where', async () => {
-    const { default: TestCompileCustomSpacer } = await resCommas(false, customSpacerConf);
+    const { default: TestCompileCustomSpacer } = await resCommas(
+      false,
+      customSpacerConf,
+    );
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileCustomSpacer />,
     );
@@ -266,7 +277,7 @@ describe('Custom spacer config is valid', async () => {
 
 describe('Does nothing without remarkGfm', async () => {
   const reCustom = /<sup> \| <\/sup>/g;
-  
+
   test('commasNeeded: contains no spacer', async () => {
     const { default: TestCompileNoRemark } = await resCommasNoRemark(true);
     const htmlString = ReactDomServer.renderToStaticMarkup(
@@ -282,6 +293,4 @@ describe('Does nothing without remarkGfm', async () => {
     );
     expect(htmlString).not.toMatch(reCustom);
   });
-
 });
-
