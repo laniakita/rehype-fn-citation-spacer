@@ -2,13 +2,11 @@ import CommasNeeded from '../posts/commas-needed.mdx';
 import NoCommasNeeded from '../posts/no-commas-needed.mdx';
 import Nav from './components/nav';
 import './App.css';
-import { Switch, Route } from 'wouter';
-
-
+import { Route, Switch } from 'wouter';
 
 export default function App() {
   return (
-    <div className='app'>
+    <div className="app">
       <Nav />
 
       <Switch>
@@ -26,7 +24,6 @@ export default function App() {
 
         <Route>404: Whoops! The requested page could not be found.</Route>
       </Switch>
-
     </div>
   );
 }

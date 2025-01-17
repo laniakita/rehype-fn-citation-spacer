@@ -1,5 +1,5 @@
-import { Link } from "wouter";
-import "./nav.css";
+import { Link } from 'wouter';
+import './nav.css';
 
 export default function Nav() {
   return (

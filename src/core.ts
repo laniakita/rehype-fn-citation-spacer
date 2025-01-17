@@ -1,23 +1,33 @@
 import type { ElementContent, Root } from 'hast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
+import { z } from 'zod';
 import { supCommaSpacer } from './spacers';
 
-export interface RehypeCitationSpacerConfig {
+export interface RehypeRefConfigOpts {
   childDataAttrBoolName?: string;
   spacer?: ElementContent;
   suppressErr?: boolean;
 }
+
+export const RehypeCitationSpacerConfig = z.object({
+  suppressErr: z.optional(z.boolean()),
+  childDataAttrBoolName: z.optional(z.string().min(1)),
+  spacer: z.optional(z.custom<ElementContent>()),
+});
 
 /**
  * Inserts a defined "spacer", or a <sup>{`, `}</sup> (default),
  * between adjacent <sup /> wrapping a single child element
  * with a matching data-attr.
  */
-export const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
+export const rehypeCitationSpacer: Plugin<
+  [z.infer<typeof RehypeCitationSpacerConfig>?],
+  Root
+> = ({
+  suppressErr = true,
   childDataAttrBoolName = 'dataFootnoteRef',
   spacer = supCommaSpacer,
-  suppressErr = true,
 } = {}) => {
   if (
     !suppressErr &&
@@ -26,6 +36,7 @@ export const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> =
     console.error(
       '[ERR]: Configured childDataAttrBoolName is undefined! Falling back to default: dataFootnoteRef',
     );
+    childDataAttrBoolName = 'dataFootnoteRef'
   }
 
   const testSpacer = (spacer satisfies ElementContent) || {};
