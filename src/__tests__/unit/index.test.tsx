@@ -8,7 +8,7 @@ import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 import rehypeCitationSpacer, {
   type RehypeCitationSpacerConfig,
-} from '../../core';
+} from '../../index';
 
 const commasNeededFile = Bun.file(
   path.join(import.meta.dir, '../fixtures/posts/commas-needed.mdx'),

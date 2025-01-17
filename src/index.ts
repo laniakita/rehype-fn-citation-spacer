@@ -1,7 +1,7 @@
 import type { ElementContent, Root } from 'hast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
-import { z } from 'zod';
+import * as v from 'valibot';
 import { supCommaSpacer } from './spacers';
 
 export interface RehypeRefConfigOpts {
@@ -10,13 +10,19 @@ export interface RehypeRefConfigOpts {
   suppressErr?: boolean;
 }
 
-const RehypeCitationSpacerConfigSchema = z.object({
-  suppressErr: z.optional(z.boolean()),
-  childDataAttrBoolName: z.optional(z.string().min(1)),
-  spacer: z.optional(z.custom<ElementContent>()),
+const RehypeCitationSpacerConfigSchema = v.object({
+  suppressErr: v.optional(v.boolean()),
+  childDataAttrBoolName: v.optional(v.pipe(v.string(), v.minLength(1))),
+  spacer: v.optional(v.custom<ElementContent>((input) => {
+    const testInput = ((input as ElementContent) satisfies ElementContent) || {};
+    if (Object.keys(testInput).length === 0 && {}.constructor === Object) {
+      return false
+    }
+    return true
+  })),
 });
 
-export type RehypeCitationSpacerConfig = z.infer<
+export type RehypeCitationSpacerConfig = v.InferOutput<
   typeof RehypeCitationSpacerConfigSchema
 >;
 
@@ -91,4 +97,4 @@ const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
   };
 };
 
-export default rehypeCitationSpacer;
+export default rehypeCitationSpacer
