@@ -19,7 +19,7 @@ export const RehypeCitationSpacerConfigSchema = v.object({
   ),
 });
 
-export type RehypeCitationSpacerConfig = v.InferOutput<
+export type RehypeCitationSpacerConfig = v.InferInput<
   typeof RehypeCitationSpacerConfigSchema
 >;
 

@@ -4,17 +4,7 @@ try {
   await Promise.all([
     Bun.build({
       entrypoints: ['./src/index.ts'],
-      outdir: './dist_with_valibot',
-      format: 'esm',
-      naming: '[dir]/[name].js',
-      plugins: [dts()],
-      throw: true,
-    }),
-  ]);
-  await Promise.all([
-    Bun.build({
-      entrypoints: ['./src/zod-index.ts'],
-      outdir: './dist_with_zod',
+      outdir: './dist',
       format: 'esm',
       naming: '[dir]/[name].js',
       plugins: [dts()],

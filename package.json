@@ -37,8 +37,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@happy-dom/global-registrator": "^16.6.0",
     "@mdx-js/esbuild": "^3.1.0",
     "@mdx-js/mdx": "^3.1.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@types/bun": "latest",
     "@types/mdx": "^2.0.13",
     "@types/react": "^19.0.7",
@@ -46,8 +50,7 @@
     "bun-plugin-dts": "^0.3.0",
     "react-dom": "^19.0.0",
     "remark-gfm": "^4.0.0",
-    "wouter": "^3.3.5",
-    "zod": "^3.24.1"
+    "wouter": "^3.3.5"
   },
   "peerDependencies": {
     "typescript": "^5.0.0",

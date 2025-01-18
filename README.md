@@ -131,24 +131,26 @@ If you want a different spacer, this plugin let's you do it! Just define a custo
 ```typescript
 import {compile} from '@mdx-js/mdx';
 import remarkGfm from 'remark-gfm';
-import rehypeCitationSpacer from 'rehype-citation-spacer'
+import rehypeCitationSpacer, {type RehypeCitationSpacerConfig} from 'rehype-citation-spacer'
 
-// results in `<sup> | </sup>`
-const customSpacer = {
-  type: 'element',
-  tagName: 'sup',
-  properties: {},
-  children: [
-    {
-      type: 'text',
-      value: ' | ',
-    },
-  ],
-};
+const myCustomRCSConfig = {
+  spacer: {
+    type: 'element',
+    tagName: 'sup',
+    properties: {},
+    children: [
+      {
+        type: 'text',
+        value: ' | ',
+      },
+    ],
+  },
+  suppressErr: false
+} satisfies RehypeCitationSpacerConfig; // only needed if you want type checking
 
 const processed = await compile("# Some Markdown File", {
   remarkPlugins: [remarkGfm],
-  rehypePlugins: [[rehypeCitationSpacer, {spacer: customSpacer, suppressErr: false}]]
+  rehypePlugins: [[rehypeCitationSpacer, myCustomRCSConfig]]
 });
 ```
 
