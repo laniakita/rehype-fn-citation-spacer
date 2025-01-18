@@ -16,7 +16,7 @@ const myCustomRCSConfig = {
       },
     ],
   },
-  suppressErr: false,
+  verboseErr: true,
 } satisfies RehypeCitationSpacerConfig;
 
 export const mdxPlugin = mdx({

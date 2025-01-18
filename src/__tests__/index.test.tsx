@@ -8,13 +8,13 @@ import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 import rehypeCitationSpacer, {
   type RehypeCitationSpacerConfig,
-} from '../../index';
+} from '../index';
 
 const commasNeededFile = Bun.file(
-  path.join(import.meta.dir, '../fixtures/posts/commas-needed.mdx'),
+  path.join(import.meta.dir, './fixtures/posts/commas-needed.mdx'),
 );
 const noCommasNeededFile = Bun.file(
-  path.join(import.meta.dir, '../fixtures/posts/no-commas-needed.mdx'),
+  path.join(import.meta.dir, './fixtures/posts/no-commas-needed.mdx'),
 );
 const commasNeededString = await commasNeededFile.text();
 const noCommasNeededString = await noCommasNeededFile.text();
@@ -50,17 +50,26 @@ const resCommasNoRemark = async (
   });
 };
 
+const sharedConf = {
+  verboseErr: true,
+};
+
 const badSpacerConf = {
-  suppressErr: false,
+  ...sharedConf,
   spacer: {} as ElementContent,
 };
 const badAttrConf = {
-  suppressErr: false,
+  ...sharedConf,
   fnDataAttr: '',
 };
 
+const badAttrConf3 = {
+  ...sharedConf,
+  fnDataAttr: {} as string,
+};
+
 const customSpacerConf = {
-  suppressErr: false,
+  ...sharedConf,
   spacer: customSpacer,
 };
 
@@ -72,23 +81,39 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe('Error messages', async () => {
-  test('Prints error on bad spacer type', async () => {
+describe('Err handling', async () => {
+  test('badSpacerConf => Output contains "spacer"', async () => {
     expect(consoleSpy).toHaveBeenCalledTimes(0);
     await resCommas(true, badSpacerConf);
     expect(consoleSpy).toHaveBeenCalledTimes(1);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining('spacer is not of type ElementContent! '),
+    const spacerErr = consoleSpy.mock.calls.some((call) =>
+      call.some((arg) => typeof arg === 'string' && arg.includes('spacer')),
     );
+    expect(spacerErr).toBeTruthy();
   });
 
-  test('Prints error on bad fnDataAttr', async () => {
+  test('badAttrConf => Output contains "invalid length"', async () => {
     expect(consoleSpy).toHaveBeenCalledTimes(0);
     await resCommas(true, badAttrConf);
     expect(consoleSpy).toHaveBeenCalledTimes(1);
-    expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining('fnDataAttr is undefined'),
+    const fnDataAttrErr = consoleSpy.mock.calls.some((call) =>
+      call.some(
+        (arg) => typeof arg === 'string' && arg.includes('Invalid length'),
+      ),
     );
+    expect(fnDataAttrErr).toBeTruthy();
+  });
+
+  test('badAttrConf3 => Output contains "Invalid type"', async () => {
+    expect(consoleSpy).toHaveBeenCalledTimes(0);
+    await resCommas(true, badAttrConf3);
+    expect(consoleSpy).toHaveBeenCalledTimes(1);
+    const fnDataAttrErr = consoleSpy.mock.calls.some((call) =>
+      call.some(
+        (arg) => typeof arg === 'string' && arg.includes('Invalid type'),
+      ),
+    );
+    expect(fnDataAttrErr).toBeTruthy();
   });
 
   test('Prints nothing on empty (good) config', async () => {
@@ -104,8 +129,8 @@ describe('Error messages', async () => {
   });
 });
 
-describe('Gracefully handles badSpacerConf', async () => {
-  test('commasNeeded: contains default spacer (`<sup>, </sup>`)', async () => {
+describe('Plugin does nothing on Err', async () => {
+  test('commasNeeded: badSpacerConf => no spacer', async () => {
     const { default: TestCompileBadSpacer } = await resCommas(
       true,
       badSpacerConf,
@@ -113,22 +138,10 @@ describe('Gracefully handles badSpacerConf', async () => {
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileBadSpacer />,
     );
-    expect(htmlString).toMatch(re);
+    expect(htmlString).not.toMatch(re);
   });
 
-  test('commasNeeded: contains default spacer in 4 places', async () => {
-    const { default: TestCompileBadSpacer } = await resCommas(
-      true,
-      badSpacerConf,
-    );
-    const htmlString = ReactDomServer.renderToStaticMarkup(
-      <TestCompileBadSpacer />,
-    );
-    const matches = htmlString.match(re);
-    expect(matches).toHaveLength(4);
-  });
-
-  test('noCommasNeeded: contains no spacer', async () => {
+  test('noCommasNeeded: badSpacerConf => contains no spacer', async () => {
     const { default: TestCompileBadSpacer } = await resCommas(
       false,
       badSpacerConf,
@@ -139,52 +152,20 @@ describe('Gracefully handles badSpacerConf', async () => {
     expect(htmlString).not.toMatch(re);
   });
 
-  test('noCommasNeeded: contains default spacer no where', async () => {
-    const { default: TestCompileBadSpacer } = await resCommas(
-      false,
-      badSpacerConf,
-    );
-    const htmlString = ReactDomServer.renderToStaticMarkup(
-      <TestCompileBadSpacer />,
-    );
-    const matches = htmlString.match(re);
-    expect(matches).not.toHaveLength;
-  });
-});
-
-describe('Gracefully handles badAttrConf', async () => {
-  test('commasNeeded: contains default spacer (`<sup>, </sup>`)', async () => {
+  test('commasNeeded: badAttrConf => contains no spacer', async () => {
     const { default: TestCompileBadAttr } = await resCommas(true, badAttrConf);
-    const htmlString = ReactDomServer.renderToStaticMarkup(
-      <TestCompileBadAttr />,
-    );
-    expect(htmlString).toMatch(re);
-  });
-
-  test('commasNeeded: contains default spacer in 4 places', async () => {
-    const { default: TestCompileBadAttr } = await resCommas(true, badAttrConf);
-    const htmlString = ReactDomServer.renderToStaticMarkup(
-      <TestCompileBadAttr />,
-    );
-    const matches = htmlString.match(re);
-    expect(matches).toHaveLength(4);
-  });
-
-  test('noCommasNeeded: contains no spacer', async () => {
-    const { default: TestCompileBadAttr } = await resCommas(false, badAttrConf);
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileBadAttr />,
     );
     expect(htmlString).not.toMatch(re);
   });
 
-  test('noCommasNeeded: contains default spacer no where', async () => {
+  test('noCommasNeeded: badAttrConf => contains no spacer', async () => {
     const { default: TestCompileBadAttr } = await resCommas(false, badAttrConf);
     const htmlString = ReactDomServer.renderToStaticMarkup(
       <TestCompileBadAttr />,
     );
-    const matches = htmlString.match(re);
-    expect(matches).not.toHaveLength;
+    expect(htmlString).not.toMatch(re);
   });
 });
 
