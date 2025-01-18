@@ -56,7 +56,7 @@ const badSpacerConf = {
 };
 const badAttrConf = {
   suppressErr: false,
-  childDataAttrBoolName: '',
+  fnDataAttr: '',
 };
 
 const customSpacerConf = {
@@ -82,12 +82,12 @@ describe('Error messages', async () => {
     );
   });
 
-  test('Prints error on bad childDataAttrBoolName', async () => {
+  test('Prints error on bad fnDataAttr', async () => {
     expect(consoleSpy).toHaveBeenCalledTimes(0);
     await resCommas(true, badAttrConf);
     expect(consoleSpy).toHaveBeenCalledTimes(1);
     expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Configured childDataAttrBoolName is undefined'),
+      expect.stringContaining('fnDataAttr is undefined'),
     );
   });
 

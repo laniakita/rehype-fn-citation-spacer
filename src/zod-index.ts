@@ -1,34 +1,24 @@
 import type { ElementContent, Root } from 'hast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
-import * as v from 'valibot';
+import * as z from 'zod';
 import { supCommaSpacer } from './spacers';
 
-export const RehypeCitationSpacerConfigSchema = v.object({
-  suppressErr: v.optional(v.boolean()),
-  fnDataAttr: v.optional(v.pipe(v.string(), v.minLength(1))),
-  spacer: v.optional(
-    v.custom<ElementContent>((input) => {
-      const testInput =
-        (input as ElementContent satisfies ElementContent) || {};
-      if (Object.keys(testInput).length === 0 && {}.constructor === Object) {
-        return false;
-      }
-      return true;
-    }),
-  ),
+export const RehypeCitationSpacerConfig = z.object({
+  suppressErr: z.optional(z.boolean()),
+  fnDataAttr: z.optional(z.string().min(1)),
+  spacer: z.optional(z.custom<ElementContent>()),
 });
-
-export type RehypeCitationSpacerConfig = v.InferOutput<
-  typeof RehypeCitationSpacerConfigSchema
->;
 
 /**
  * Inserts a defined "spacer", or a <sup>{`, `}</sup> (default),
  * between adjacent <sup /> wrapping a single child element
  * with a matching data-attr.
  */
-const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
+export const rehypeCitationSpacer: Plugin<
+  [z.infer<typeof RehypeCitationSpacerConfig>?],
+  Root
+> = ({
   suppressErr = true,
   fnDataAttr = 'dataFootnoteRef',
   spacer = supCommaSpacer,
@@ -90,5 +80,3 @@ const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
     });
   };
 };
-
-export default rehypeCitationSpacer;

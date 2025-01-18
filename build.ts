@@ -1,24 +1,24 @@
-import type { BuildConfig } from 'bun';
 import dts from 'bun-plugin-dts';
-
-const defaultBuildConfig: BuildConfig = {
-  entrypoints: ['./src/index.ts'],
-  outdir: './dist',
-  throw: true
-};
 
 try {
   await Promise.all([
     Bun.build({
-      ...defaultBuildConfig,
-      plugins: [dts()],
+      entrypoints: ['./src/index.ts'],
+      outdir: './dist_with_valibot',
       format: 'esm',
       naming: '[dir]/[name].js',
+      plugins: [dts()],
+      throw: true,
     }),
+  ]);
+  await Promise.all([
     Bun.build({
-      ...defaultBuildConfig,
-      format: 'cjs',
-      naming: '[dir]/[name].cjs',
+      entrypoints: ['./src/zod-index.ts'],
+      outdir: './dist_with_zod',
+      format: 'esm',
+      naming: '[dir]/[name].js',
+      plugins: [dts()],
+      throw: true,
     }),
   ]);
 } catch (err) {
