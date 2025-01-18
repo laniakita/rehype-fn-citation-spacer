@@ -96,8 +96,6 @@ You could use CSS to target the before psuedo-elements where there's multiple re
 
 ## Install
 
-> **Warning: the below isn't valid ... YET! Once it's uploaded to npm, this disclaimer will be removed.**
-
 This is a [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) module, with support for Node.js 22+/Bun 1.1.43+.
 
 You can install `rehype-citation-spacer` with `bun` like so:
