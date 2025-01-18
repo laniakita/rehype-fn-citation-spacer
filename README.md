@@ -2,7 +2,10 @@
 
 This is a rehype plugin that runs after remarkGfm (required), and separates multiple inline citations/references in the generated HTML markup with a comma (and a space).
 
+## Contents
+
 - [rehype-citation-spacer](#rehype-citation-spacer)
+  - [Contents](#contents)
   - [The Problem](#the-problem)
   - [My Solution: A Plugin Named _rehype-citation-spacer_](#my-solution-a-plugin-named-rehype-citation-spacer)
     - [Other Solutions I Explored](#other-solutions-i-explored)
