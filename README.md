@@ -2,6 +2,16 @@
 
 This is a rehype plugin that runs after remarkGfm (required), and separates multiple inline citations/references in the generated HTML markup with a comma (and a space).
 
+- [rehype-citation-spacer](#rehype-citation-spacer)
+  - [The Problem](#the-problem)
+  - [My Solution: A Plugin Named _rehype-citation-spacer_](#my-solution-a-plugin-named-rehype-citation-spacer)
+    - [Other Solutions I Explored](#other-solutions-i-explored)
+  - [Usage](#usage)
+    - [Pre-requisites](#pre-requisites)
+    - [Default (Empty Configuration)](#default-empty-configuration)
+    - [Custom Spacer](#custom-spacer)
+    - [Configuration Reference](#configuration-reference)
+
 ## The Problem
 
 Github Flavored Markdown allows you to create footnotes (thus inline citations/references) like this:
@@ -138,7 +148,6 @@ const processed = await compile("# Some Markdown File", {
   rehypePlugins: [[rehypeCitationSpacer, {spacer: customSpacer, suppressErr: false}]]
 });
 ```
-
 
 ### Configuration Reference
 
