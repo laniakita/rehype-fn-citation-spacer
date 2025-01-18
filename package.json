@@ -1,6 +1,6 @@
 {
   "name": "rehype-citation-spacer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Rehype plugin that inserts a spacer between multiple in-text footnote citations/references.",
   "author": "Lani Akita <me@laniakita.com> (https://laniakita.com)",
   "license": "MIT",
