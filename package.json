@@ -26,7 +26,8 @@
   "scripts": {
     "test": "bun test",
     "check": "bunx biome check --write",
-    "build": "bun test && bun check && bun build.ts",
+    "lint": "bunx biome lint --write",
+    "build": "bun test && bun lint && bun build.ts",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
