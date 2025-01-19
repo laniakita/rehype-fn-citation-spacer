@@ -164,7 +164,7 @@ import {compile} from '@mdx-js/mdx';
 import remarkGfm from 'remark-gfm';
 import rehypeFnCitationSpacer, {type rehypeFnCitationSpacerConfig} from 'rehype-fn-citation-spacer'
 
-const myCustomRCSConfig = {
+const myCustomRFCSConfig = {
   spacer: {
     type: 'element',
     tagName: 'sup',
@@ -181,7 +181,7 @@ const myCustomRCSConfig = {
 
 const processed = await compile("# Some Markdown File", {
   remarkPlugins: [remarkGfm],
-  rehypePlugins: [[rehypeFnCitationSpacer, myCustomRCSConfig]]
+  rehypePlugins: [[rehypeFnCitationSpacer, myCustomRFCSConfig]]
 });
 ```
 

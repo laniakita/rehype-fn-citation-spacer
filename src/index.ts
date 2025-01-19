@@ -81,11 +81,11 @@ const rehypeFnCitationSpacer: Plugin<[rehypeFnCitationSpacerConfig?], Root> = ({
     if (err instanceof v.ValiError) {
       if (verboseErr) {
         console.error(
-          `[RCS_ERR]: Something went wrong!\n${err.stack}\n`,
+          `[RFCS_ERR]: Something went wrong!\n${err.stack}\n`,
           err.issues,
         );
       } else {
-        console.error(`[RCS_ERR]: Something went wrong!\n${err.message}`);
+        console.error(`[RFCS_ERR]: Something went wrong!\n${err.message}`);
       }
     }
   }
