@@ -1,6 +1,6 @@
 {
   "name": "rehype-fn-citation-spacer",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A Rehype plugin that makes some space between adjacent in-text footnote citations/references.",
   "author": "Lani Akita <me@laniakita.com> (https://laniakita.com)",
   "license": "MIT",
