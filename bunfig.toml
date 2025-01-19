@@ -1,0 +1,4 @@
+[test]
+root = './src/__tests__'
+coverage = true
+coverageThreshold = 0.9

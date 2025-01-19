@@ -1,12 +1,12 @@
 {
   "name": "rehype-citation-spacer",
   "version": "0.0.1",
-  "description": "A Rehype plugin that inserts a spacer between multiple in-text footnote citations/references.",
+  "description": "A Rehype plugin that makes some space between adjacent in-text footnote citations/references.",
   "author": "Lani Akita <me@laniakita.com> (https://laniakita.com)",
   "license": "MIT",
   "type": "module",
   "engines": {
-    "bun": "1.1.43"
+    "bun": ">=1.1.43"
   },
   "repository": {
     "type": "git",
@@ -22,12 +22,14 @@
     "types": "./dist/index.d.ts",
     "import": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "!flake.lock"
+  ],
   "scripts": {
-    "test:build": "bun ./test-build.ts",
-    "test:serve": "bunx serve -s -n ./src/__tests__/dist/app-build",
     "test": "bun test",
     "check": "bunx biome check --write",
-    "build": "bun build.ts",
+    "build": "bun test && bun check && bun build.ts",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
@@ -37,20 +39,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@happy-dom/global-registrator": "^16.6.0",
-    "@mdx-js/esbuild": "^3.1.0",
     "@mdx-js/mdx": "^3.1.0",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
     "@types/bun": "latest",
     "@types/mdx": "^2.0.13",
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "bun-plugin-dts": "^0.3.0",
     "react-dom": "^19.0.0",
-    "remark-gfm": "^4.0.0",
-    "wouter": "^3.3.5"
+    "remark-gfm": "^4.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0",

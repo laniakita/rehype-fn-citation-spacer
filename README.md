@@ -1,25 +1,42 @@
-# rehype-citation-spacer
+<div align="center">
+    <h1 style="letter-spacing:0.25ch;font-family:monospace">rehype-citation-spacer</h1>
+    <p>A Rehype plugin that makes some space between adjacent in-text footnote citations/references.</p>
+</div>
 
-This is a rehype plugin that runs after [`remark-gfm`](https://github.com/remarkjs/remark-gfm) (required), and separates multiple inline citations/references in the generated HTML markup with a comma (and a space).
+## Summary
 
-## Contents
+This is a simple rehype plugin that's designed to run after [`remark-gfm`](https://github.com/remarkjs/remark-gfm), and separates any generated in-text footnote citations/references found in the [hast tree](https://github.com/syntax-tree/hast) with either a _comma and a space_ ([default](#default-empty-configuration)) or a [user defined spacer](#custom-spacer).
 
-- [rehype-citation-spacer](#rehype-citation-spacer)
-  - [Contents](#contents)
-  - [The Problem](#the-problem)
-  - [My Solution: A Plugin Named _rehype-citation-spacer_](#my-solution-a-plugin-named-rehype-citation-spacer)
-    - [Other Solutions I Explored](#other-solutions-i-explored)
-  - [Install](#install)
-  - [Usage](#usage)
-    - [Pre-requisites](#pre-requisites)
-    - [Default (Empty Configuration)](#default-empty-configuration)
-    - [Custom Spacer](#custom-spacer)
-    - [Configuration Reference](#configuration-reference)
-  - [Contributing](#contributing)
+## Table of Contents
+
+- [Summary](#summary)
+- [Table of Contents](#table-of-contents)
+- [The Problem](#the-problem)
+- [This Solution: Plugin Named _rehype-citation-spacer_](#this-solution-plugin-named-rehype-citation-spacer)
+  - [Other Solutions I Explored](#other-solutions-i-explored)
+- [Install](#install)
+- [Usage](#usage)
+  - [Default (Empty Configuration)](#default-empty-configuration)
+  - [Custom Spacer](#custom-spacer)
+  - [Configuration Reference](#configuration-reference)
+- [Contributing](#contributing)
+  - [Reporting Bugs](#reporting-bugs)
+  - [Suggesting New Features](#suggesting-new-features)
 
 ## The Problem
 
-Github Flavored Markdown allows you to create footnotes (thus inline citations/references) like this:
+<br />
+
+<figure style="display:table;margin:auto">
+
+![screenshot showing end-result of serial footnotes with just remarkGfm, i.e. reference numbers stuck together without any spacing.](./assets/without-rehype-citation-spacer.png "Vanilla remarkGfm Serial Footnote Citation Handling")
+
+<figcaption style="display:table-caption;caption-side:bottom"><strong>Figure 1</strong>: Using pure <a href="https://github.github.com/gfm/">Github Flavored Markdown</a> syntax, serial In-text footnote citations <em>1, 2, 3, & 4</em> get squished in the resultant markup, appearing as <em>1234</em> instead.</figcaption>
+</figure>
+
+<br />
+
+Github Flavored Markdown allows you to create footnotes and in-text footnote citations/references like this:
 
 ```markdown
 My cool statement[^reference-1], which is supported by other cool statements[^reference-2][^reference-3].
@@ -29,7 +46,7 @@ My cool statement[^reference-1], which is supported by other cool statements[^re
 [^reference-3]: Doe, Jane. 2023. Other Supporting Paper Title. 
 ```
 
-The only problem is that when multiple inline references are used in serial, such as in the above, they wind up squished together, making for a pretty confusing user experience. The above example would look like [2](#)[3](#) instead of [2](#) [3](#). That's because in the HTML, the footnote citations are literally stuck together.
+The only problem is that when multiple inline references are used in serial they wind up squished together, making for a pretty confusing user experience. The above example would look like [2](#)[3](#) instead of [2](#) [3](#), similar to **Figure 1**. That's because in the HTML, the footnote citations are literally stuck together.
 
 ```html
 <p>
@@ -42,15 +59,24 @@ The only problem is that when multiple inline references are used in serial, suc
 </p>
 ```
 
-You can see how the above phenomena might manifest in the browser (note the squished 1234):
+## This Solution: Plugin Named _rehype-citation-spacer_
 
-![screenshot showing end-result of serial footnotes with just remarkGfm, i.e. reference numbers stuck together without any spacing.](./assets/without-rehype-citation-spacer.png "Vanilla remarkGfm Serial Footnote Citation Handling")
+<br />
 
-## My Solution: A Plugin Named _rehype-citation-spacer_
+<figure style="display:table;margin:auto">
 
-The core of the problem was a lack of space between in-text footnote references. So, to solve that, I wrote a rehype plugin which injects a _spacer_ (default: `<sup>, </sup>`) between serial `<sup />` nodes into the [hast](https://github.com/syntax-tree/hast) tree. Specifically, the spacer is injected between sequential `<sup />` nodes containing a child `<a />` with an arbritrary target data-attribute (default: `data-footnote-ref`).
+![screenshot showing the end result of using rehype-citation-spacer, i.e. serial in-text footnote references have a comma and a space between them.](./assets/with-rehype-citation-spacer.png "Demonstrating the _spacers_ injected by rehype-citation-spacer")
 
-The resultant post-injection HTML (of the initial example) would look something like this:
+<figcaption style="display:table-caption;caption-side:bottom"><strong>Figure 2</strong>: Using <code>rehype-citation-spacer</code> with its <a href="#default-empty-configuration">default configuration</a>, serial In-text footnote citations <em>1, 2, 3, & 4</em> appear properly as <em>1, 2, 3, 4</em>.</figcaption>
+</figure>
+
+<br />
+
+The core of the problem was a lack of space between in-text footnote references. So, I wrote this rehype plugin to inject a _spacer_ (default: `<sup>, </sup>`) between adjacent `<sup />` nodes in the [hast](https://github.com/syntax-tree/hast) tree, to make some space.
+
+Specifically, the spacer is injected between sequential `<sup />` nodes containing a single child `<a />` node with an arbitrary target data-attribute (default: `data-footnote-ref`). The end result of this process is demonstrated by **Figure 2**.
+
+Likewise, using **Figure 2** as a basis, we can estimate that the resultant post-injection HTML of the initial example would probably look something like this:
 
 ```html
 <p>
@@ -63,10 +89,6 @@ The resultant post-injection HTML (of the initial example) would look something 
   "."
 </p>
 ```
-
-You can also see how this makes the footnote citations from the browser example much easier to read/interact with:
-
-![screenshot showing the end result of using rehype-citation-spacer, i.e. serial in-text footnote references have a comma and a space between them.](./assets/with-rehype-citation-spacer.png "Demonstrating the _spacers_ injected by rehype-citation-spacer")
 
 ### Other Solutions I Explored
 
@@ -90,40 +112,29 @@ While I like this solution, it's extremely tedious. It's also quite a bit of lab
 
 <summary>CSS Styling</summary>
 
-You could use CSS to target the before psuedo-elements where there's multiple references in a row, but in most cases you'd have to wrap every text node in a `<span />` since CSS doesn't pick up raw text nodes as elements. Likewise, this solution doesn't work in a RSS feed reader (which will never use your sites' stylesheets).
+You could use CSS to target the before psuedo-elements where there's multiple references in a row, but in most cases you'd have to wrap every text node in a `<span />` since CSS doesn't pick up raw text nodes as elements. Likewise, this solution doesn't work in a RSS feed reader (which will never use your site's stylesheets).
 
 </details>
 
 ## Install
 
-This is a [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) module, with support for Node.js 22+/Bun 1.1.43+.
+This is a [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) module, built with [`bun`](https://bun.sh/).
 
-You can install `rehype-citation-spacer` with `bun` like so:
+You can install `rehype-citation-spacer` with any node package manager. Using `bun` as an example, the command is:
 
 ```console
 bun add rehype-citation-spacer
 ```
 
-And while `remark-gfm` isn't technically a dependency, it's not very useful without it. You can install it with `bun` using:
+<details>
 
-```console
-bun add remark-gfm
-```
+<summary><strong>why <code>remark-gfm</code> isn't a dependency.</strong></summary>
+
+`rehype-citation-spacer` won't error out if it's not present. In fact, so long as it finds `<sup />` nodes, that wrap a single element node with some target data-attribute (see: [fnDataAttr](#configuration-reference)), it will inject a spacer just fine.
+
+</details>
 
 ## Usage
-
-### Pre-requisites
-
-1. Import and configure `remark-gfm` in your remark plugins array.
-
-    ```typescript
-    import {compile} from '@mdx-js/mdx';
-    import remarkGfm from 'remark-gfm';
-
-    const processed = await compile("# Some Markdown File", {
-      remarkPlugins: [remarkGfm],
-    });
-    ```
 
 ### Default (Empty Configuration)
 
@@ -182,4 +193,16 @@ const processed = await compile("# Some Markdown File", {
 
 ## Contributing
 
-Proper guidelines coming soon! However, in the mean time, feel free to submit a PR! Just make sure to include a brief summary of what you've changed/added, and why. Once it's submitted, I'll try to review/merge it when I can. Thank you!
+Contributions are welcome! So, Feel free to submit a PR! Just make sure to include a brief summary of what you've changed/added, and why.
+
+### Reporting Bugs
+
+If something's not working right, please don't hesitate to [open an issue](https://github.com/laniakita/rehype-citation-spacer/issues/new) with the _bug_ label (or other relevant label(s)). Likewise, please make sure to include the following in your bug report:
+
+- Describe what happened.
+- Describe the environment where this occurred (OS, Node.js version, etc.).
+- The console output generated by using `verboseErr: true` in your configuration.
+
+### Suggesting New Features
+
+If you've got an idea, I'd love to hear about it. Just [create a new issue](https://github.com/laniakita/rehype-citation-spacer/issues/new) with the _enhancement_ label (or other relevant label(s)).
