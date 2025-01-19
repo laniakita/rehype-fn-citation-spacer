@@ -8,10 +8,7 @@
   "engines": {
     "node": ">=20"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/laniakita/rehype-citation-spacer"
-  },
+  "repository": "github:laniakita/rehype-citation-spacer",
   "bugs": {
     "url": "https://github.com/laniakita/rehype-citation-spacer/issues"
   },
