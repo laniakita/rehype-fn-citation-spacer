@@ -34,6 +34,8 @@ This is a simple rehype plugin that's designed to run after [`remark-gfm`](https
 </figure>
 
 <br />
+<br />
+<br />
 
 Github Flavored Markdown allows you to create footnotes and in-text footnote citations/references like this:
 
@@ -68,6 +70,8 @@ The only problem is that when multiple inline references are used in serial they
 
 </figure>
 
+<br />
+<br />
 <br />
 
 The core of the problem was a lack of space between in-text footnote references. So, I wrote this rehype plugin to inject a _spacer_ (default: `<sup>, </sup>`) between adjacent `<sup />` nodes in the [hast](https://github.com/syntax-tree/hast) tree, to make some space.
