@@ -33,7 +33,7 @@
     "lint": "bunx biome lint --write",
     "build": "bun build.ts",
     "prepublishOnly": "bun run build",
-    "release": "bun run release-it"
+    "release": "bun --env-file=.env.production run release-it"
   },
   "dependencies": {
     "@types/hast": "^3.0.4",
