@@ -4,7 +4,7 @@ import { visit } from 'unist-util-visit';
 import * as v from 'valibot';
 import { supCommaSpacer } from './spacers';
 
-export const RehypeCitationSpacerConfigSchema = v.object({
+export const rehypeFnCitationSpacerConfigSchema = v.object({
   fnDataAttr: v.optional(v.pipe(v.string(), v.minLength(1))),
   spacer: v.optional(
     v.custom<ElementContent>((input) => {
@@ -19,8 +19,8 @@ export const RehypeCitationSpacerConfigSchema = v.object({
   verboseErr: v.optional(v.boolean()),
 });
 
-export type RehypeCitationSpacerConfig = v.InferInput<
-  typeof RehypeCitationSpacerConfigSchema
+export type rehypeFnCitationSpacerConfig = v.InferInput<
+  typeof rehypeFnCitationSpacerConfigSchema
 >;
 
 /**
@@ -28,14 +28,14 @@ export type RehypeCitationSpacerConfig = v.InferInput<
  * between adjacent <sup /> wrapping a single child element
  * with a matching data-attr.
  */
-const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
+const rehypeFnCitationSpacer: Plugin<[rehypeFnCitationSpacerConfig?], Root> = ({
   fnDataAttr = 'dataFootnoteRef',
   spacer = supCommaSpacer,
   verboseErr = false,
 } = {}) => {
   try {
     // Throw error on invalid config
-    v.parse(RehypeCitationSpacerConfigSchema, {
+    v.parse(rehypeFnCitationSpacerConfigSchema, {
       fnDataAttr: fnDataAttr,
       spacer: spacer,
       verboseErr: verboseErr,
@@ -91,4 +91,4 @@ const rehypeCitationSpacer: Plugin<[RehypeCitationSpacerConfig?], Root> = ({
   }
 };
 
-export default rehypeCitationSpacer;
+export default rehypeFnCitationSpacer;

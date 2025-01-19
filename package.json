@@ -1,5 +1,5 @@
 {
-  "name": "rehype-citation-spacer",
+  "name": "rehype-fn-citation-spacer",
   "version": "0.0.1",
   "description": "A Rehype plugin that makes some space between adjacent in-text footnote citations/references.",
   "author": "Lani Akita <me@laniakita.com> (https://laniakita.com)",
@@ -8,11 +8,11 @@
   "engines": {
     "node": ">=20"
   },
-  "repository": "github:laniakita/rehype-citation-spacer",
+  "repository": "github:laniakita/rehype-fn-citation-spacer",
   "bugs": {
-    "url": "https://github.com/laniakita/rehype-citation-spacer/issues"
+    "url": "https://github.com/laniakita/rehype-fn-citation-spacer/issues"
   },
-  "homepage": "https://github.com/laniakita/rehype-citation-spacer",
+  "homepage": "https://github.com/laniakita/rehype-fn-citation-spacer",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -55,7 +55,7 @@
     "citation",
     "reference",
     "spacer",
-    "rehype-citation-spacer",
+    "rehype-fn-citation-spacer",
     "remark",
     "gfm",
     "remarkGfm",

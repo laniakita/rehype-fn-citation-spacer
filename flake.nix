@@ -1,5 +1,5 @@
 {
-  description = "A dev flake.nix for laniakita/rehype-citation-spacer";
+  description = "A dev flake.nix for laniakita/rehype-fn-citation-spacer";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };

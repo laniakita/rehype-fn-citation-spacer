@@ -6,8 +6,8 @@ import type { ElementContent } from 'hast';
 import * as ReactDomServer from 'react-dom/server';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
-import rehypeCitationSpacer, {
-  type RehypeCitationSpacerConfig,
+import rehypeFnCitationSpacer, {
+  type rehypeFnCitationSpacerConfig,
 } from '../index';
 
 const commasNeededFile = Bun.file(
@@ -31,22 +31,22 @@ const customSpacer = {
 
 const resCommas = async (
   isCommas: boolean,
-  options?: RehypeCitationSpacerConfig,
+  options?: rehypeFnCitationSpacerConfig,
 ) => {
   return await evaluate(isCommas ? commasNeededString : noCommasNeededString, {
     ...runtime,
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypeCitationSpacer, options]],
+    rehypePlugins: [[rehypeFnCitationSpacer, options]],
   });
 };
 
 const resCommasNoRemark = async (
   isCommas: boolean,
-  options?: RehypeCitationSpacerConfig,
+  options?: rehypeFnCitationSpacerConfig,
 ) => {
   return await evaluate(isCommas ? commasNeededString : noCommasNeededString, {
     ...runtime,
-    rehypePlugins: [[rehypeCitationSpacer, options]],
+    rehypePlugins: [[rehypeFnCitationSpacer, options]],
   });
 };
 

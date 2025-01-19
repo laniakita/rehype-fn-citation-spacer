@@ -12,7 +12,7 @@ This is a simple rehype plugin that's designed to run after [`remark-gfm`](https
 - [Summary](#summary)
 - [Table of Contents](#table-of-contents)
 - [The Problem](#the-problem)
-- [This Solution: Plugin Named _rehype-citation-spacer_](#this-solution-plugin-named-rehype-citation-spacer)
+- [This Solution: Plugin Named _rehype-fn-citation-spacer_](#this-solution-plugin-named-rehype-fn-citation-spacer)
   - [Other Solutions I Explored](#other-solutions-i-explored)
 - [Install](#install)
 - [Usage](#usage)
@@ -28,7 +28,7 @@ This is a simple rehype plugin that's designed to run after [`remark-gfm`](https
 <div align="center">
 <figure>
 
-![screenshot showing end-result of serial footnotes with just remarkGfm, i.e. reference numbers stuck together without any spacing.](./assets/without-rehype-citation-spacer.png "Vanilla remarkGfm Serial Footnote Citation Handling")
+![screenshot showing end-result of serial footnotes with just remarkGfm, i.e. reference numbers stuck together without any spacing.](./assets/without-rehype-fn-citation-spacer.png "Vanilla remarkGfm Serial Footnote Citation Handling")
 
 <figcaption><strong>Figure 1</strong>: Using pure <a href="https://github.github.com/gfm/">Github Flavored Markdown</a> syntax, serial In-text footnote citations <em>1, 2, 3, & 4</em> get squished in the resultant markup, appearing as <em>1234</em> instead.</figcaption>
 
@@ -60,14 +60,14 @@ The only problem is that when multiple inline references are used in serial they
 </p>
 ```
 
-## This Solution: Plugin Named _rehype-citation-spacer_
+## This Solution: Plugin Named _rehype-fn-citation-spacer_
 
 <div align="center">
 <figure>
 
-![screenshot showing the end result of using rehype-citation-spacer, i.e. serial in-text footnote references have a comma and a space between them.](./assets/with-rehype-citation-spacer.png "Demonstrating the _spacers_ injected by rehype-citation-spacer")
+![screenshot showing the end result of using rehype-fn-citation-spacer, i.e. serial in-text footnote references have a comma and a space between them.](./assets/with-rehype-fn-citation-spacer.png "Demonstrating the _spacers_ injected by rehype-fn-citation-spacer")
 
-<figcaption><strong>Figure 2</strong>: Using <code>rehype-citation-spacer</code> with its <a href="#default-empty-configuration">default configuration</a>, serial In-text footnote citations <em>1, 2, 3, & 4</em> appear properly as <em>1, 2, 3, 4</em>.</figcaption>
+<figcaption><strong>Figure 2</strong>: Using <code>rehype-fn-citation-spacer</code> with its <a href="#default-empty-configuration">default configuration</a>, serial In-text footnote citations <em>1, 2, 3, & 4</em> appear properly as <em>1, 2, 3, 4</em>.</figcaption>
 
 </figure>
 </div>
@@ -122,17 +122,17 @@ You could use CSS to target the before psuedo-elements where there's multiple re
 
 This is a [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) module.
 
-You can install `rehype-citation-spacer` with any node package manager. Using `bun` as an example, the command looks like:
+You can install `rehype-fn-citation-spacer` with any node package manager. Using `bun` as an example, the command looks like:
 
 ```console
-bun add rehype-citation-spacer
+bun add rehype-fn-citation-spacer
 ```
 
 <details>
 
 <summary><strong>why <code>remark-gfm</code> isn't a dependency.</strong></summary>
 
-`rehype-citation-spacer` won't error out if it's not present. In fact, so long as it finds `<sup />` nodes, that wrap a single element node with some target data-attribute (see: [fnDataAttr](#configuration-reference)), it will inject a spacer just fine.
+`rehype-fn-citation-spacer` won't error out if it's not present. In fact, so long as it finds `<sup />` nodes, that wrap a single element node with some target data-attribute (see: [fnDataAttr](#configuration-reference)), it will inject a spacer just fine.
 
 </details>
 
@@ -140,29 +140,29 @@ bun add rehype-citation-spacer
 
 ### Default (Empty Configuration)
 
-For the default behavior (spacer: `<sup>, </sup>`, fnDataAttr: "dataFootnoteRef"), simply import and load `rehypeCitationSpacer` into your rehype plugins array. No configuration needed.
+For the default behavior (spacer: `<sup>, </sup>`, fnDataAttr: "dataFootnoteRef"), simply import and load `rehypeFnCitationSpacer` into your rehype plugins array. No configuration needed.
 
 ```typescript
 import {compile} from '@mdx-js/mdx';
 import remarkGfm from 'remark-gfm';
-import rehypeCitationSpacer from 'rehype-citation-spacer'
+import rehypeFnCitationSpacer from 'rehype-fn-citation-spacer'
 
 const processed = await compile("# Some Markdown File", {
   remarkPlugins: [remarkGfm],
-  rehypePlugins: [rehypeCitationSpacer]
+  rehypePlugins: [rehypeFnCitationSpacer]
 });
 ```
 
 ### Custom Spacer
 
-If you want a different spacer, this plugin let's you do it! Just define a custom spacer, and load it into the `rehypeCitationSpacer` configuration object.
+If you want a different spacer, this plugin let's you do it! Just define a custom spacer, and load it into the `rehypeFnCitationSpacer` configuration object.
 
 **Important: Your spacer needs to be of type `ElementContent`, otherwise it will fail to inject!** You should also enable `verboseErr` to get detailed error messages from the plugin.
 
 ```typescript
 import {compile} from '@mdx-js/mdx';
 import remarkGfm from 'remark-gfm';
-import rehypeCitationSpacer, {type RehypeCitationSpacerConfig} from 'rehype-citation-spacer'
+import rehypeFnCitationSpacer, {type rehypeFnCitationSpacerConfig} from 'rehype-fn-citation-spacer'
 
 const myCustomRCSConfig = {
   spacer: {
@@ -177,11 +177,11 @@ const myCustomRCSConfig = {
     ],
   },
   verboseErr: false
-} satisfies RehypeCitationSpacerConfig; // only needed if you want type checking
+} satisfies rehypeFnCitationSpacerConfig; // only needed if you want type checking
 
 const processed = await compile("# Some Markdown File", {
   remarkPlugins: [remarkGfm],
-  rehypePlugins: [[rehypeCitationSpacer, myCustomRCSConfig]]
+  rehypePlugins: [[rehypeFnCitationSpacer, myCustomRCSConfig]]
 });
 ```
 
@@ -199,7 +199,7 @@ Contributions are welcome! So, Feel free to submit a PR! Just make sure to inclu
 
 ### Reporting Bugs
 
-If something's not working right, please don't hesitate to [open an issue](https://github.com/laniakita/rehype-citation-spacer/issues/new) with the _bug_ label (or other relevant label(s)). Likewise, please make sure to include the following in your bug report:
+If something's not working right, please don't hesitate to [open an issue](https://github.com/laniakita/rehype-fn-citation-spacer/issues/new) with the _bug_ label (or other relevant label(s)). Likewise, please make sure to include the following in your bug report:
 
 - Describe what happened.
 - Describe the environment where this occurred (OS, Node.js version, etc.).
@@ -207,4 +207,4 @@ If something's not working right, please don't hesitate to [open an issue](https
 
 ### Suggesting New Features
 
-If you've got an idea, I'd love to hear about it. Just [create a new issue](https://github.com/laniakita/rehype-citation-spacer/issues/new) with the _enhancement_ label (or other relevant label(s)).
+If you've got an idea, I'd love to hear about it. Just [create a new issue](https://github.com/laniakita/rehype-fn-citation-spacer/issues/new) with the _enhancement_ label (or other relevant label(s)).
