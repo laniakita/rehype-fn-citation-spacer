@@ -1,6 +1,10 @@
 <div align="center">
     <h1>r e h y p e - f n - c i t a t i o n - s p a c e r</h1>
     <p>A rehype plugin that makes some space between adjacent in-text footnote citations/references.</p>
+
+![NPM Version](https://img.shields.io/npm/v/rehype-fn-citation-spacer?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/laniakita/rehype-fn-citation-spacer)
+
 </div>
 
 ## Summary
