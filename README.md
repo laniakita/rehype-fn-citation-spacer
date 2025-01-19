@@ -120,9 +120,9 @@ You could use CSS to target the before psuedo-elements where there's multiple re
 
 ## Install
 
-This is a [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) module, built with [`bun`](https://bun.sh/).
+This is a [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) module.
 
-You can install `rehype-citation-spacer` with any node package manager. Using `bun` as an example, the command is:
+You can install `rehype-citation-spacer` with any node package manager. Using `bun` as an example, the command looks like:
 
 ```console
 bun add rehype-citation-spacer
