@@ -56,12 +56,6 @@
     "reference",
     "spacer",
     "rehype-fn-citation-spacer",
-    "remark",
-    "gfm",
-    "remarkGfm",
-    "github",
-    "markdown",
-    "github flavored markdown",
     "syntax",
     "plugin"
   ]
