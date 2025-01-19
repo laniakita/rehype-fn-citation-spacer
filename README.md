@@ -1,5 +1,5 @@
 <div align="center">
-    <h1 style="letter-spacing:0.25ch;font-family:monospace">rehype-citation-spacer</h1>
+    <h1>r e h y p e - c i t a t i o n - s p a c e r</h1>
     <p>A Rehype plugin that makes some space between adjacent in-text footnote citations/references.</p>
 </div>
 
@@ -25,13 +25,12 @@ This is a simple rehype plugin that's designed to run after [`remark-gfm`](https
 
 ## The Problem
 
-<br />
-
-<figure style="display:table;margin:auto">
+<figure align="center">
 
 ![screenshot showing end-result of serial footnotes with just remarkGfm, i.e. reference numbers stuck together without any spacing.](./assets/without-rehype-citation-spacer.png "Vanilla remarkGfm Serial Footnote Citation Handling")
 
-<figcaption style="display:table-caption;caption-side:bottom"><strong>Figure 1</strong>: Using pure <a href="https://github.github.com/gfm/">Github Flavored Markdown</a> syntax, serial In-text footnote citations <em>1, 2, 3, & 4</em> get squished in the resultant markup, appearing as <em>1234</em> instead.</figcaption>
+<figcaption><strong>Figure 1</strong>: Using pure <a href="https://github.github.com/gfm/">Github Flavored Markdown</a> syntax, serial In-text footnote citations <em>1, 2, 3, & 4</em> get squished in the resultant markup, appearing as <em>1234</em> instead.</figcaption>
+
 </figure>
 
 <br />
@@ -61,13 +60,12 @@ The only problem is that when multiple inline references are used in serial they
 
 ## This Solution: Plugin Named _rehype-citation-spacer_
 
-<br />
-
-<figure style="display:table;margin:auto">
+<figure align="center">
 
 ![screenshot showing the end result of using rehype-citation-spacer, i.e. serial in-text footnote references have a comma and a space between them.](./assets/with-rehype-citation-spacer.png "Demonstrating the _spacers_ injected by rehype-citation-spacer")
 
-<figcaption style="display:table-caption;caption-side:bottom"><strong>Figure 2</strong>: Using <code>rehype-citation-spacer</code> with its <a href="#default-empty-configuration">default configuration</a>, serial In-text footnote citations <em>1, 2, 3, & 4</em> appear properly as <em>1, 2, 3, 4</em>.</figcaption>
+<figcaption><strong>Figure 2</strong>: Using <code>rehype-citation-spacer</code> with its <a href="#default-empty-configuration">default configuration</a>, serial In-text footnote citations <em>1, 2, 3, & 4</em> appear properly as <em>1, 2, 3, 4</em>.</figcaption>
+
 </figure>
 
 <br />
