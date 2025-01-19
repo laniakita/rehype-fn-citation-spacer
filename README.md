@@ -2,10 +2,10 @@
     <h1>r e h y p e - f n - c i t a t i o n - s p a c e r</h1>
     <p>A rehype plugin that makes some space between adjacent in-text footnote citations/references.</p>
 
-![Codecov](https://img.shields.io/codecov/c/github/laniakita/rehype-fn-citation-spacer?style=flat-square&logo=codecov&logoColor=%23F01F7A)
-![NPM Version](https://img.shields.io/npm/v/rehype-fn-citation-spacer?style=flat-square)
-![NPM Downloads](https://img.shields.io/npm/dm/rehype-fn-citation-spacer?style=flat-square)
-![GitHub License](https://img.shields.io/github/license/laniakita/rehype-fn-citation-spacer?style=flat-square)
+[![Codecov](https://img.shields.io/codecov/c/github/laniakita/rehype-fn-citation-spacer?style=flat-square&logo=codecov&logoColor=%23F01F7A)](https://app.codecov.io/github/laniakita/rehype-fn-citation-spacer)
+[![NPM Version](https://img.shields.io/npm/v/rehype-fn-citation-spacer?style=flat-square)](https://www.npmjs.com/package/rehype-fn-citation-spacer)
+[![NPM Downloads](https://img.shields.io/npm/dm/rehype-fn-citation-spacer?style=flat-square)](https://npmtrends.com/rehype-fn-citation-spacer)
+[![GitHub License](https://img.shields.io/github/license/laniakita/rehype-fn-citation-spacer?style=flat-square)](https://github.com/laniakita/rehype-fn-citation-spacer/blob/master/LICENSE)
 
 </div>
 
