@@ -1,6 +1,6 @@
 <div align="center">
     <h1>r e h y p e - f n - c i t a t i o n - s p a c e r</h1>
-    <p>A Rehype plugin that makes some space between adjacent in-text footnote citations/references.</p>
+    <p>A rehype plugin that makes some space between adjacent in-text footnote citations/references.</p>
 </div>
 
 ## Summary
