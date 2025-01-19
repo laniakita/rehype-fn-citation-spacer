@@ -25,17 +25,15 @@ This is a simple rehype plugin that's designed to run after [`remark-gfm`](https
 
 ## The Problem
 
-<figure align="center">
+<div align="center">
+<figure>
 
 ![screenshot showing end-result of serial footnotes with just remarkGfm, i.e. reference numbers stuck together without any spacing.](./assets/without-rehype-citation-spacer.png "Vanilla remarkGfm Serial Footnote Citation Handling")
 
 <figcaption><strong>Figure 1</strong>: Using pure <a href="https://github.github.com/gfm/">Github Flavored Markdown</a> syntax, serial In-text footnote citations <em>1, 2, 3, & 4</em> get squished in the resultant markup, appearing as <em>1234</em> instead.</figcaption>
 
 </figure>
-
-<br />
-<br />
-<br />
+</div>
 
 Github Flavored Markdown allows you to create footnotes and in-text footnote citations/references like this:
 
@@ -62,17 +60,15 @@ The only problem is that when multiple inline references are used in serial they
 
 ## This Solution: Plugin Named _rehype-citation-spacer_
 
-<figure align="center">
+<div align="center">
+<figure>
 
 ![screenshot showing the end result of using rehype-citation-spacer, i.e. serial in-text footnote references have a comma and a space between them.](./assets/with-rehype-citation-spacer.png "Demonstrating the _spacers_ injected by rehype-citation-spacer")
 
 <figcaption><strong>Figure 2</strong>: Using <code>rehype-citation-spacer</code> with its <a href="#default-empty-configuration">default configuration</a>, serial In-text footnote citations <em>1, 2, 3, & 4</em> appear properly as <em>1, 2, 3, 4</em>.</figcaption>
 
 </figure>
-
-<br />
-<br />
-<br />
+</div>
 
 The core of the problem was a lack of space between in-text footnote references. So, I wrote this rehype plugin to inject a _spacer_ (default: `<sup>, </sup>`) between adjacent `<sup />` nodes in the [hast](https://github.com/syntax-tree/hast) tree, to make some space.
 
